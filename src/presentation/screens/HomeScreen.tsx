@@ -25,7 +25,7 @@ export const HomeScreen = ({ navigation }: any) => {
     } = useHomeViewModel(navigation);
 
     return (
-        <SafeAreaView style={styles.safeArea} edges={['top']}>
+        <SafeAreaView style={styles.safeArea} edges={['top', 'bottom']}>
             <View style={styles.container}>
                 {/* Header */}
                 <View style={styles.header}>

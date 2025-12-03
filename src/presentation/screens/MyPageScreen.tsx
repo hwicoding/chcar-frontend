@@ -16,7 +16,7 @@ export const MyPageScreen = ({ navigation }: any) => {
     const { user, menuItems, onMenuPress } = useMyPageViewModel(navigation);
 
     return (
-        <SafeAreaView style={styles.safeArea} edges={['top']}>
+        <SafeAreaView style={styles.safeArea} edges={['top', 'bottom']}>
             <View style={styles.container}>
                 {/* Profile Section */}
                 <View style={styles.profileHeader}>
