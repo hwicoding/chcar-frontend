@@ -14,6 +14,7 @@
     - **로그인 화면 (LoginScreen)**: MVVM 패턴 적용, 유효성 검사 및 홈 이동 로직.
     - **홈 화면 (HomeScreen)**: 메인 배너, 퀵 메뉴, 추천 차량 리스트 UI 구현.
     - **시세 예측 화면 (PredictionScreen)**: 차량 정보 입력 폼, 시세 조회 시뮬레이션 로직 및 결과 카드 UI.
+    - **마이 페이지 (MyPageScreen)**: 사용자 프로필 표시, 설정 메뉴 리스트, 로그아웃 기능 구현.
 
 ### 수정됨 (Changed)
 - **Reanimated 이슈 해결**:
