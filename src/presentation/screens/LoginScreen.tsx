@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import { Colors } from '@/shared/Colors';
 import { useLoginViewModel } from '../viewmodels/LoginViewModel';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const LoginScreen = ({ navigation }: any) => {
     const {
@@ -30,57 +31,60 @@ export const LoginScreen = ({ navigation }: any) => {
                 behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
                 style={styles.container}
             >
-                <View style={styles.contentContainer}>
-                    {/* Logo Area */}
-                    <View style={styles.logoContainer}>
-                        <Text style={styles.logoText}>CHCAR</Text>
-                        <Text style={styles.subLogoText}>내 차의 가치를 발견하다</Text>
-                    </View>
+                <SafeAreaView style={{ flex: 1 }}>
+                    <View style={styles.contentContainer}>
+                        {/* Logo Area */}
+                        {/* ... content ... */}
+                        <View style={styles.logoContainer}>
+                            <Text style={styles.logoText}>CHCAR</Text>
+                            <Text style={styles.subLogoText}>내 차의 가치를 발견하다</Text>
+                        </View>
 
-                    {/* Input Area */}
-                    <View style={styles.inputContainer}>
-                        <TextInput
-                            style={styles.input}
-                            placeholder="이메일"
-                            placeholderTextColor={Colors.textLight}
-                            value={email}
-                            onChangeText={setEmail}
-                            keyboardType="email-address"
-                            autoCapitalize="none"
-                        />
-                        <TextInput
-                            style={styles.input}
-                            placeholder="비밀번호"
-                            placeholderTextColor={Colors.textLight}
-                            value={password}
-                            onChangeText={setPassword}
-                            secureTextEntry
-                        />
-                    </View>
+                        {/* Input Area */}
+                        <View style={styles.inputContainer}>
+                            <TextInput
+                                style={styles.input}
+                                placeholder="이메일"
+                                placeholderTextColor={Colors.textLight}
+                                value={email}
+                                onChangeText={setEmail}
+                                keyboardType="email-address"
+                                autoCapitalize="none"
+                            />
+                            <TextInput
+                                style={styles.input}
+                                placeholder="비밀번호"
+                                placeholderTextColor={Colors.textLight}
+                                value={password}
+                                onChangeText={setPassword}
+                                secureTextEntry
+                            />
+                        </View>
 
-                    {/* Button Area */}
-                    <TouchableOpacity
-                        style={styles.loginButton}
-                        onPress={handleLogin}
-                        disabled={isLoading}
-                    >
-                        {isLoading ? (
-                            <ActivityIndicator color={Colors.white} />
-                        ) : (
-                            <Text style={styles.loginButtonText}>로그인</Text>
-                        )}
-                    </TouchableOpacity>
-
-                    <View style={styles.footerContainer}>
-                        <TouchableOpacity>
-                            <Text style={styles.footerText}>회원가입</Text>
+                        {/* Button Area */}
+                        <TouchableOpacity
+                            style={styles.loginButton}
+                            onPress={handleLogin}
+                            disabled={isLoading}
+                        >
+                            {isLoading ? (
+                                <ActivityIndicator color={Colors.white} />
+                            ) : (
+                                <Text style={styles.loginButtonText}>로그인</Text>
+                            )}
                         </TouchableOpacity>
-                        <Text style={styles.divider}>|</Text>
-                        <TouchableOpacity>
-                            <Text style={styles.footerText}>비밀번호 찾기</Text>
-                        </TouchableOpacity>
+
+                        <View style={styles.footerContainer}>
+                            <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+                                <Text style={styles.footerText}>회원가입</Text>
+                            </TouchableOpacity>
+                            <Text style={styles.divider}>|</Text>
+                            <TouchableOpacity>
+                                <Text style={styles.footerText}>비밀번호 찾기</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
-                </View>
+                </SafeAreaView>
             </KeyboardAvoidingView>
         </TouchableWithoutFeedback>
     );

@@ -5,6 +5,7 @@ import { Colors } from '@/shared/Colors';
 
 // Screens
 import { LoginScreen } from '../screens/LoginScreen';
+import { SignUpScreen } from '../screens/SignUpScreen';
 import { HomeScreen } from '../screens/HomeScreen';
 import { PredictionScreen } from '../screens/PredictionScreen';
 import { MyPageScreen } from '../screens/MyPageScreen';
@@ -12,6 +13,7 @@ import { MyPageScreen } from '../screens/MyPageScreen';
 // Types
 export type RootStackParamList = {
     Auth: undefined;
+    SignUp: undefined;
     Home: undefined;
     Prediction: undefined;
     MyPage: undefined;
@@ -32,6 +34,11 @@ export const AppNavigator = () => {
                 <Stack.Screen
                     name="Auth"
                     component={LoginScreen}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="SignUp"
+                    component={SignUpScreen}
                     options={{ headerShown: false }}
                 />
 
