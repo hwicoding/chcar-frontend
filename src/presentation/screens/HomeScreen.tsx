@@ -5,8 +5,7 @@ import {
     StyleSheet,
     ScrollView,
     TouchableOpacity,
-    Dimensions,
-    Image
+    Dimensions
 } from 'react-native';
 import { Colors } from '@/shared/Colors';
 import { useHomeViewModel } from '../viewmodels/HomeViewModel';

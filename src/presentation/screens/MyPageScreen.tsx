@@ -4,8 +4,7 @@ import {
     Text,
     StyleSheet,
     TouchableOpacity,
-    ScrollView,
-    Image
+    ScrollView
 } from 'react-native';
 import { Colors } from '@/shared/Colors';
 import { useMyPageViewModel } from '../viewmodels/MyPageViewModel';
