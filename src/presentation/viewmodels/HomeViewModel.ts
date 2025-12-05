@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Alert } from 'react-native';
+import { carRepository } from '@/shared/DependencyInjection';
 
 // 더미 데이터 타입 정의
 export interface BannerItem {
@@ -35,7 +36,7 @@ export const useHomeViewModel = (navigation: any) => {
         loadData();
     }, []);
 
-    const loadData = () => {
+    const loadData = async () => {
         // 1. 배너 데이터
         setBanners([
             { id: 1, title: '내 차 팔기,\n최고가로 도전하세요!', imageUrl: '', backgroundColor: '#E8F5E9' },
@@ -50,12 +51,22 @@ export const useHomeViewModel = (navigation: any) => {
             { id: 4, title: '마이페이지', iconName: 'person', route: 'MyPage' },
         ]);
 
-        // 3. 추천 차량 데이터
-        setRecommendedCars([
-            { id: 1, name: '제네시스 GV80', price: '6,500만원', year: '2023년', mileage: '1.2만km', imageUrl: 'https://via.placeholder.com/150' },
-            { id: 2, name: '현대 그랜저 GN7', price: '4,200만원', year: '2023년', mileage: '5천km', imageUrl: 'https://via.placeholder.com/150' },
-            { id: 3, name: '기아 쏘렌토 MQ4', price: '3,800만원', year: '2022년', mileage: '2.5만km', imageUrl: 'https://via.placeholder.com/150' },
-        ]);
+        // 3. 추천 차량 데이터 (Repository 사용)
+        try {
+            const cars = await carRepository.getRecommendedCars();
+            // Domain Entity -> View Model Item 변환
+            const viewCars = cars.map(car => ({
+                id: Number(car.id),
+                name: car.name,
+                price: car.price,
+                year: car.year,
+                mileage: car.mileage,
+                imageUrl: car.imageUrl || 'https://via.placeholder.com/150'
+            }));
+            setRecommendedCars(viewCars);
+        } catch (error) {
+            console.error('Failed to load recommended cars', error);
+        }
     };
 
     const onMenuPress = (route: string) => {

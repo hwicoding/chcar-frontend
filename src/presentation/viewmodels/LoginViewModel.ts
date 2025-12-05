@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '@/store/slices/authSlice';
 import { Alert } from 'react-native';
+import { authRepository } from '@/shared/DependencyInjection';
 
 export const useLoginViewModel = (navigation: any) => {
     const dispatch = useDispatch();
@@ -18,16 +19,19 @@ export const useLoginViewModel = (navigation: any) => {
 
         setIsLoading(true);
 
-        // TODO: 실제 API 연동 시 비동기 처리
-        setTimeout(() => {
-            setIsLoading(false);
+        try {
+            const user = await authRepository.login(email, password);
 
             // Redux 상태 업데이트
-            dispatch(login({ email, name: '사용자' }));
+            dispatch(login({ email: user.email, name: user.name }));
 
             // 홈 화면으로 이동 (Stack Navigation)
             navigation.replace('Home');
-        }, 1000);
+        } catch (error) {
+            Alert.alert('오류', '로그인에 실패했습니다.');
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return {
